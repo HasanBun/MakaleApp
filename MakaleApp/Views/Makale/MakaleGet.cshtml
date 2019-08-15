@@ -1,0 +1,39 @@
+﻿@model Tuple<IEnumerable<MakaleApp.Data.Entity.Yorum>,MakaleApp.Data.Entity.Makale>
+
+@{
+    ViewData["Title"] = "MakaleGet";
+}
+
+<h2>@Model.Item2.Baslik</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div>
+    <p>
+        @Model.Item2.Icerik
+    </p>
+</div>
+<div>
+    <h3>
+        Yorumlar
+    </h3>
+    @foreach (var item in Model.Item1)
+    {
+        <p>
+            @item.YorumIcerik
+        </p>
+        <p>
+            @item.CreateDate
+        </p>
+        <p>
+            @item.UpdateDate
+        </p>
+        @if (item.CreatedUserId == ViewBag.User)
+        {
+            <a asp-action="MakaleUpdate" asp-route-id="@item.MakaleId">Edit</a>
+            <a asp-action="MakaleGet" asp-route-id="@item.MakaleId">Details</a>
+        }
+        <a asp-action="Delete" asp-route-id="@item.MakaleId">Delete</a>
+    }
+</div>

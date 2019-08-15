@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MakaleApp.Data.Entity.Makale>
+
+@{
+    ViewData["Title"] = "Arama Sonucu";
+}
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Baslik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Icerik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategori)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedUserId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Baslik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Icerik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedUserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedUserId)
+                </td>
+                <td>
+                    @if (item.CreatedUserId == ViewBag.User)
+                    {
+                        <a asp-action="MakaleUpdate" asp-route-id="@item.MakaleId">Edit</a>
+                        <a asp-action="MakaleGet" asp-route-id="@item.MakaleId">Details</a>
+                    }
+                    <a asp-action="Delete" asp-route-id="@item.MakaleId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
